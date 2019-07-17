@@ -44,6 +44,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   app.locals.fallido = req.flash('fallido');
   app.locals.realizado = req.flash('realizado');  
+  app.locals.importante = req.flash('importante');  
   app.locals.usuario = req.user;
 //  console.log(app.locals.usuario);
   next();
@@ -54,6 +55,8 @@ app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
 app.use('/clientes', require('./routes/clientes'));
+app.use('/vendedor', require('./routes/vendedor'));
+
 
 
 //Public

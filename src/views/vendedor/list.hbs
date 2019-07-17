@@ -9,28 +9,32 @@
                     <th scope="col">Nombre Completo</th>
                     <th scope="col">Direccion</th>
                     <th scope="col">Telefono</th>
+                    <th scope="col">Acceso id</th>
+                    <th scope="col">Email</th>
                     <th scope="col">
-                        <a href="clientes/add" class="btn btn-success" data-toggle="tooltip"
-                            data-placement="right" title="Agregar Cliente">+</a>
+                        <a href="vendedor/add" class="btn btn-success" data-toggle="tooltip"
+                            data-placement="right" title="Agregar Vendedor">+</a>
                     </th>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    {{#each clientes}}
-                    <th scope="row">{{id}}</td>
+                    {{#each vendedor_acceso}}
+                    <th scope="row">{{id_vendedor}}</td>
                     <td>{{dui}}</td>
                     <td>{{nombre_completo}}</td>
                     <td>{{direccion}}</td>
                     <td>{{telefono}}</td>
-                    <td><a href="../clientes/delete/{{id}}" class="btn btn-danger">Borrar</a></td>
-                    <td><a href="../clientes/edit/{{id}}" class="btn btn-secondary">Editar</a></td>
+                    <td>{{acceso_id}}</td>
+                    <td>{{email}}</td>
+                    <td><a href="../vendedor/delete/{{id_vendedor}}" class="btn btn-danger">Borrar</a></td>
+                    <td><a href="../vendedor/edit/{{id_vendedor}}" class="btn btn-secondary">Editar</a></td>
                 </tr>
                 {{else }}
                 <tr>
                     <th>No hay datos guardados.</th>
-                    <td><a href="../clientes/add" class="btn btn-success">Crear</a></td>
+                    <td><a href="../vendedor/add" class="btn btn-success">Crear</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -40,4 +44,3 @@
     </div>
 
 </div>
-

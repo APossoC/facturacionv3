@@ -3,7 +3,7 @@
         <div class="col-md-4 mx-auto">
             <div class="card ">
                 <div class="card-body">
-                    <form action="/clientes/add" method="POST">
+                    <form action="/vendedor/add" method="POST">
 
                         <div class="form-group">
                             <input type="number" name="dui" class="form-control" placeholder="Dui">
@@ -18,10 +18,18 @@
                         <div class="form-group">
                             <input type="text" name="telefono" class="form-control" placeholder="Telefono">
                         </div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Digite su email"
+                                autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="credencial" class="form-control"
+                                placeholder="Digite su credencial">
+                        </div>
 
                         <div class="form-group">
-                            <a href="/clientes" class="btn btn-danger btn-block">Regresar</a>
-                            <button class="btn btn-success btn-block">Guardar</button>                            
+                            <a href="/vendedor" class="btn btn-danger btn-block">Regresar</a>
+                            <button class="btn btn-success btn-block">Guardar</button> 
                         </div>
                     </form>
                 </div>

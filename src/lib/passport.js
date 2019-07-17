@@ -11,16 +11,16 @@ passport.use('local.signin', new LocalStrategy({
     //console.log(req.body);
     const filas = await poolDB.query('SELECT * FROM acceso WHERE email = ? ', [email]);
     if (filas.length > 0) {
-        const usuario = filas[0];  
-        const credencialValida = await helpers.compararCredencial(credencial, usuario.credencial);    
-        if (credencialValida) {            
-            done(null, usuario, req.flash('realizado','Bienvenido: ' + usuario.email));
+        const acceso = filas[0];
+        const credencialValida = await helpers.compararCredencial(credencial, acceso.credencial);
+        if (credencialValida) {
+            done(null, acceso, req.flash('realizado', 'Bienvenido: ' + acceso.email));
         } else {
-            done(null, false, req.flash('fallido','Credencial invalida'));
+            done(null, false, req.flash('fallido', 'Credencial invalida'));
         }
     } else {
-        return done(null, false, req.flash('fallido','Email no esta registrado'));
-    }  
+        return done(null, false, req.flash('fallido', 'Email no esta registrado'));
+    }
 }));
 
 passport.use('local.signup', new LocalStrategy({
@@ -38,13 +38,13 @@ passport.use('local.signup', new LocalStrategy({
     return done(null, nuevoUsuario);
 }));
 
-passport.serializeUser((usuario, done) => {    
-    done(null, usuario.id);  
+passport.serializeUser((acceso, done) => {
+    done(null, acceso.id_acceso);
     //console.log(done);
 });
 
 passport.deserializeUser(async (id, done) => {
-    const filas = await poolDB.query('SELECT * FROM acceso WHERE id = ?', [id]);
-    done(null, filas[0]);   
-    //done(null, null);
+    const filas = await poolDB.query('SELECT * FROM acceso WHERE id_acceso = ?', [id]);
+    done(null, filas[0]);
+     //done(null, null);
 });
