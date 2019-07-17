@@ -1,0 +1,71 @@
+<style>
+  .dropdown-menu {
+    background-color: lightslategray;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:rgb(16, 3, 27)">
+  <div class="container">
+    <a class="navbar-brand" target="_blank"
+      href="https://www.linkedin.com/in/alberto-luis-posso-cardona-b78364135">WpSellerWebApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        {{#if usuario}}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Gestion
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Clientes</a>
+            <a class="dropdown-item" href="#">Productos</a>
+            <a class="dropdown-item" href="#">Vendedor</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Ventas</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{usuario.email}}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Total vendido</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout" class="nav-link">Cerrar Sesion</a>
+          </div>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/signin">SignIn</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">SignUp</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Fazt
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" href="https://github.com/FaztTech/nodejs-mysql-links">
+              <img src="https://img.icons8.com/doodle/48/000000/github.png"> GitHub
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://www.youtube.com/watch?v=qJ5R9WTW0_E">
+              <img src="https://img.icons8.com/doodle/48/000000/youtube.png"> VideoTutorial
+            </a>
+          </div>
+        </li>
+
+        {{/if}}
+
+      </ul>
+    </div>
+  </div>
+</nav>

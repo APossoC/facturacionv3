@@ -1,0 +1,29 @@
+<div class="container p4">
+    <div class="row">
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Documento Identidad</th>
+                    <th scope="col">Nombre Completo</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                </tr>
+            </thead>
+            {{#each clientes}}
+            <tbody>
+                <tr>
+                    <th scope="row">{{id}}</td>
+                    <td>{{dui}}</td>
+                    <td>{{nombre_completo}}</td>
+                    <td>{{direccion}}</td>
+                    <td>{{telefono}}</td>
+                </tr>
+            </tbody>
+            {{/each}}
+        </table>
+
+    </div>
+
+</div>
