@@ -1,7 +1,7 @@
 <div class="container p4">
     <div class="row">
-
-        <table class="table table-sm">
+        <table class="table-sm table-striped table-dark">
+            <caption>Lista de Clientes</caption>
             <thead>
                 <tr>
                     <th scope="col">id</th>
@@ -10,8 +10,8 @@
                     <th scope="col">Direccion</th>
                     <th scope="col">Telefono</th>
                     <th scope="col">
-                        <a href="clientes/add" class="btn btn-success" data-toggle="tooltip"
-                            data-placement="right" title="Agregar Cliente">+</a>
+                        <a href="#" class="btn btn-success" data-toggle="modal"
+                            data-target="#agregarClienteModalCenter">Agregar</a>
                     </th>
                 </tr>
             </thead>
@@ -24,13 +24,15 @@
                     <td>{{nombre_completo}}</td>
                     <td>{{direccion}}</td>
                     <td>{{telefono}}</td>
+                    <td><a href="#" class="btn btn-primary" data-toggle="modal"
+                            data-target="#modificarClienteModalCenter">Editar</a></td>
                     <td><a href="../clientes/delete/{{id}}" class="btn btn-danger">Borrar</a></td>
                     <td><a href="../clientes/edit/{{id}}" class="btn btn-secondary">Editar</a></td>
+
                 </tr>
                 {{else }}
                 <tr>
-                    <th>No hay datos guardados.</th>
-                    <td><a href="../clientes/add" class="btn btn-success">Crear</a></td>
+                    <th>No hay datos guardados.</th>                    
                 </tr>
                 {{/each}}
             </tbody>
@@ -41,3 +43,96 @@
 
 </div>
 
+
+<!-- Modal Agregar Clientes -->
+<div class="modal fade" id="agregarClienteModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="agregarModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formAgregarCliente" method="post" action="/clientes/add">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="number" name="dui" class="form-control" placeholder="Dui">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="direccion" class="form-control" placeholder="Direccion">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Modificar Clientes -->
+<div class="modal fade" id="modificarClienteModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="modificarModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarModalCenterTitle">Modificar Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formModificarCliente" method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="number" name="dui" class="form-control" placeholder="Dui">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="direccion" class="form-control" placeholder="Direccion">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#formAgregarCliente').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/add',
+            data: $('form').serialize(),
+            type: 'POST',
+            dataType: "json",
+            success: function () {
+                $('form').reset();
+            },
+            complete: function () {
+                $('#formAgregarCliente').each(function () {
+                    this.reset();//Here form fields will be cleared.
+                });
+            }
+        });      
+</script>

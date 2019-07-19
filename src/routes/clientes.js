@@ -9,7 +9,7 @@ router.get('/',isLoggedIn, async (req, res) => {
 });
 
 router.get('/add',isLoggedIn, (req, res) => {
-    res.render('clientes/add');
+    res.render('clientes/add'); 
 });
 
 router.post('/add',isLoggedIn, async (req, res) => {
@@ -22,7 +22,7 @@ router.post('/add',isLoggedIn, async (req, res) => {
     };
     await poolBd.query('INSERT INTO cliente SET ?', [nuevoCliente]);
     req.flash('realizado','Cliente guardado satificactoriamente');
-    res.redirect('/clientes');
+    res.redirect('/clientes');  
 });
 
 router.get('/delete/:id',isLoggedIn, async (req, res) => {
@@ -34,9 +34,9 @@ router.get('/delete/:id',isLoggedIn, async (req, res) => {
 
 router.get('/edit/:id',isLoggedIn, async (req, res) => {
     const { id } = req.params;
-    const links = await poolBd.query('SELECT * FROM cliente WHERE ID = ?',[id]);
+    const clientes = await poolBd.query('SELECT * FROM cliente WHERE ID = ?',[id]);
     //console.log(links[0]);
-    res.render('clientes/edit',{link: links[0]});   
+    res.render('clientes/edit',{cliente: clientes[0]});   
     
 });
 

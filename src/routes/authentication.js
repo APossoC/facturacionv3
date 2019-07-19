@@ -5,11 +5,11 @@ const passport = require('passport');
 const {isLoggedIn}= require('../lib/auth');
 const {isNotLoggedIn}= require('../lib/auth');
 
-router.get('/signup',isNotLoggedIn, (req, res) => {
+/*router.get('/signup',isNotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
-/*router.post('/singup', (req, res) => {
+router.post('/singup', (req, res) => {
     passport.authenthicate('local.signup',{
         successRedirect:'/profile',
         failureRedirect: '/singup',
@@ -19,11 +19,11 @@ router.get('/signup',isNotLoggedIn, (req, res) => {
     res.send('recibido');
 });*/
 
-router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
+/*router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
-}));
+}));*/
 
 router.get('/signin', isNotLoggedIn,(req, res) => {
     res.render('auth/signin');
@@ -45,7 +45,7 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
 router.get('/logout',isLoggedIn, (req, res) => {   
     req.logOut();
-    res.redirect('/signin');
+    res.redirect('/');
 });
 
 
