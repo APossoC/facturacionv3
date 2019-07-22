@@ -1,6 +1,6 @@
 <div class="container p4">
     <div class="row">
-        <table class="table-sm table-striped table-dark">
+        <table class="table-sm table-striped table-dark" id="tablaClientes">
             <caption>Lista de Clientes</caption>
             <thead>
                 <tr>
@@ -24,15 +24,16 @@
                     <td>{{nombre_completo}}</td>
                     <td>{{direccion}}</td>
                     <td>{{telefono}}</td>
-                    <td><a href="#" class="btn btn-primary" data-toggle="modal"
-                            data-target="#modificarClienteModalCenter">Editar</a></td>
-                    <td><a href="../clientes/delete/{{id}}" class="btn btn-danger">Borrar</a></td>
-                    <td><a href="../clientes/edit/{{id}}" class="btn btn-secondary">Editar</a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-primary edit" data-dui="{{dui}}"
+                            data-nombre_completo="{{nombre_completo}}" data-direccion="{{direccion}}"
+                            data-telefono="{{telefono}}">Editar</a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-danger delete" data-id="{{id}}" data-nombre_completo="{{nombre_completo}}">Borrar</a></td>
+
 
                 </tr>
                 {{else }}
                 <tr>
-                    <th>No hay datos guardados.</th>                    
+                    <th>No hay datos guardados.</th>
                 </tr>
                 {{/each}}
             </tbody>
@@ -45,30 +46,33 @@
 
 
 <!-- Modal Agregar Clientes -->
-<div class="modal fade" id="agregarClienteModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="agregarModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Clientes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="formAgregarCliente" method="post" action="/clientes/add">
+<form id="formAgregarCliente" method="post" action="/clientes/add">
+
+    <div class="modal fade" id="agregarClienteModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="agregarModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="number" name="dui" class="form-control" placeholder="Dui">
+                        <input type="number" name="dui" class="form-control" placeholder="Dui" required="true">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo">
+                        <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo"
+                            required="true">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="direccion" class="form-control" placeholder="Direccion">
+                        <input type="text" name="direccion" class="form-control" placeholder="Direccion"
+                            required="true">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono">
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono" required="true">
                     </div>
 
                 </div>
@@ -76,63 +80,90 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 <!-- Modal Modificar Clientes -->
-<div class="modal fade" id="modificarClienteModalCenter" tabindex="-1" role="dialog"
-    aria-labelledby="modificarModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modificarModalCenterTitle">Modificar Clientes</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="formModificarCliente" method="post">
+<form action="/clientes/edit" method="post">
+    <div class="modal fade" id="modificarClienteModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="modificarModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modificarModalCenterTitle">Modificar Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="modal-body">
-
                     <div class="form-group">
-                        <input type="number" name="dui" class="form-control" placeholder="Dui">
+                        <input type="number" name="dui" class="form-control dui" placeholder="Dui">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo">
+                        <input type="text" name="nombre_completo" class="form-control nombre_completo"
+                            placeholder="Nombre Completo">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="direccion" class="form-control" placeholder="Direccion">
+                        <input type="text" name="direccion" class="form-control direccion" placeholder="Direccion">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono">
+                        <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
-<script type="text/javascript">
-    $('#formAgregarCliente').on('submit', function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: '/add',
-            data: $('form').serialize(),
-            type: 'POST',
-            dataType: "json",
-            success: function () {
-                $('form').reset();
-            },
-            complete: function () {
-                $('#formAgregarCliente').each(function () {
-                    this.reset();//Here form fields will be cleared.
-                });
-            }
-        });      
+<!-- Modal Elimiar Clientes -->
+<form id="add-row-form" action="/clientes/delete" method="post">
+    <div class="modal fade" id="eliminarClienteModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="eliminarModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eliminarModalCenterTitle">Eliminar Clientes</h5>
+                </div>
+                <div class="modal-body">
+                    <strong>Desea eliminar cliente : </strong><strong class="nombre_completo"></strong><strong>?</strong>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id" class="form-control cliente_id2" required>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        $('#tablaClientes').on('click', '.edit', function () {
+            var dui = $(this).data('dui');
+            var nombre_completo = $(this).data('nombre_completo');
+            var direccion = $(this).data('direccion');
+            var telefono = $(this).data('telefono');
+            $('#modificarClienteModalCenter').modal('show');
+            $('.dui').val(dui);
+            $('.nombre_completo').val(nombre_completo);
+            $('.direccion').val(direccion);
+            $('.telefono').val(telefono);
+        });
+
+        $('#tablaClientes').on('click', '.delete', function () {    
+            var cliente_id = $(this).data('id');
+            var nombre_completo = $(this).data('nombre_completo');
+            $('#eliminarClienteModalCenter').modal('show');
+            $('.nombre_completo').text(nombre_completo);
+            $('.cliente_id2').val(cliente_id);
+        });
+    });
 </script>
