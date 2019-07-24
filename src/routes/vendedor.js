@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const poolBd = require('../database');
 const helpers = require('../lib/helpers');
-
 const { isLoggedIn } = require('../lib/auth');
 
 
@@ -24,7 +23,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         req.flash('importante', 'Ya existe! email suministrado');
         res.redirect('/vendedor');
 
-    } if(verificacion_vendedor[0]){
+    } if (verificacion_vendedor[0]) {
         req.flash('importante', 'Ya existe! identificacion sumunistrada');
         res.redirect('/vendedor');
     }
@@ -50,7 +49,7 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     const filas = await poolBd.query('SELECT * FROM vendedor WHERE id_vendedor = ?', [req.body.id_vendedor]);
     const id_vendedor = req.body.id_vendedor;
     const id_acceso = filas[0].acceso_id;
-    if (filas[0].nombre_completo === 'admin') {
+    if (filas[0].email === 'admin@admin.admin') {
         req.flash('importante', 'Importante no se puede borrar Admin');
         res.redirect('/vendedor');
     }
@@ -65,6 +64,42 @@ router.post('/delete', isLoggedIn, async (req, res) => {
         req.flash('importante', 'Importante Acceso al sistema eliminado adicionalmente');
         res.redirect('/vendedor');
     }
+});
+
+router.post('/edit', isLoggedIn, async (req, res) => {
+    const { dui, nombre_completo, direccion, telefono, email, credencial } = req.body;
+    const filas = await poolBd.query('SELECT * FROM vendedor WHERE dui = ?', [dui]);
+    const acceso_id = filas[0].acceso_id;
+    const editarAcceso = {
+        email,
+        credencial
+    };
+    editarAcceso.credencial = await helpers.cifrarCredencial(credencial);
+    const editarVendedor = {
+        dui,
+        nombre_completo,
+        direccion,
+        telefono,
+        acceso_id
+    };
+    if (email === 'admin@admin.admin') {
+        req.flash('importante', 'Importante no se puede modificar Admin');
+        res.redirect('/vendedor');
+    } else if (req.user.id_acceso == acceso_id) {
+        await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
+        await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
+        req.logOut();
+    }
+    else {
+        await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
+        await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
+        req.flash('realizado', 'Vendedor modificado satificactoriamente');
+        req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
+        res.redirect('/vendedor');
+    }
+
+
+
 
 
 });

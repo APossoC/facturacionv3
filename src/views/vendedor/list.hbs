@@ -1,7 +1,7 @@
 <div class="container p4">
     <div class="row">
 
-        <table class="table-sm table-striped table-dark" id="tablaVendedor">
+        <table class="table-striped table-dark rounded-top rounded-bottom" id="tablaVendedor">
             <thead>
                 <tr>
                     <th scope="col">id</th>
@@ -28,14 +28,16 @@
                     <td>{{telefono}}</td>
                     <td>{{acceso_id}}</td>
                     <td>{{email}}</td>
-                    <td><a href="../vendedor/edit/{{id_vendedor}}" class="btn btn-primary">Editar</a></td>
-                    <td><a href="javascript:void(0);" class="btn btn-danger delete" data-id_vendedor="{{id_vendedor}}" data-nombre_completo="{{nombre_completo}}">Borrar</a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-primary edit" data-dui="{{dui}}"
+                            data-nombre_completo="{{nombre_completo}}" data-direccion="{{direccion}}"
+                            data-telefono="{{telefono}}" data-email="{{email}}">Editar</a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-danger delete" data-id_vendedor="{{id_vendedor}}"
+                            data-nombre_completo="{{nombre_completo}}">Borrar</a></td>
 
                 </tr>
                 {{else }}
                 <tr>
                     <th>No hay datos guardados.</th>
-                    <td><a href="../vendedor/add" class="btn btn-success">Crear</a></td>
                 </tr>
                 {{/each}}
             </tbody>
@@ -76,11 +78,11 @@
                         <input type="email" name="email" class="form-control" placeholder="Digite su email" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="credencial" class="form-control" placeholder="Digite su credencial"
+                        <input type="password" name="credencial" class="form-control" placeholder="Digite la credencial"
                             required>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" id="alertEditarVendedor">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
@@ -89,9 +91,9 @@
     </div>
 </form>
 
-<!-- Modal Modificar Clientes -->
-<form action="/clientes/edit" method="post">
-    <div class="modal fade" id="modificarClienteModalCenter" tabindex="-1" role="dialog"
+<!-- Modal Modificar Vendedor -->
+<form action="/vendedor/edit" method="post">
+    <div class="modal fade" id="modificarVendedorModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="modificarModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -103,42 +105,54 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="number" name="dui" class="form-control dui" placeholder="Dui">
+                        Dui: <input type="number" name="dui" class="form-control dui" placeholder="Dui" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nombre_completo" class="form-control nombre_completo"
+                        Email:<input type="email" name="email" class="form-control email" placeholder="Digite su email"
+                            readonly>
+                    </div>
+                    <div class="form-group">
+                        Nombre Completo: <input type="text" name="nombre_completo" class="form-control nombre_completo"
                             placeholder="Nombre Completo">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="direccion" class="form-control direccion" placeholder="Direccion">
+                        Direccion: <input type="text" name="direccion" class="form-control direccion"
+                            placeholder="Direccion">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
+                        Telefono: <input type="text" name="telefono" class="form-control telefono"
+                            placeholder="Telefono">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+
+                    <div class="form-group">
+                        Credencial: <input type="password" name="credencial" class="form-control credencial"
+                            placeholder="Digite su credencial" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                    <div class="modal-body"></div>
                 </div>
             </div>
         </div>
-    </div>
 </form>
 
-<!-- Modal Elimiar Vendedor -->
-<form id="add-row-form" action="/vendedor/delete" method="post">
+<!-- Modal Elimiar Clientes -->
+<form action="/clientes/delete" method="post">
     <div class="modal fade" id="eliminarVendedorModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="eliminarModalCenterTitle" aria-hidden="true">
+        aria-labelledby="eliminarVendedorModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eliminarModalCenterTitle">Eliminar Vendedor</h5>
+                    <h5 class="modal-title" id="eliminarVendedorModalCenterTitle">Eliminar Vendedor</h5>
                 </div>
                 <div class="modal-body">
-                    <strong>Desea eliminar vendedor : </strong><strong class="nombre_completo"></strong><strong>?</strong>
+                    <strong>Desea eliminar vendedor : </strong><strong
+                        class="nombre_completo"></strong><strong>?</strong>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id_vendedor" class="vendedor2" required>
+                    <input type="hidden" name="id" class="form-control cliente_id2" required>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     <button type="submit" class="btn btn-success">Si</button>
                 </div>
@@ -148,15 +162,21 @@
 </form>
 
 
+
+
+
 <script>
     $(document).ready(function () {
-        $('#tablaClientes').on('click', '.edit', function () {
+        $('#tablaVendedor').on('click', '.edit', function () {
             var dui = $(this).data('dui');
             var nombre_completo = $(this).data('nombre_completo');
             var direccion = $(this).data('direccion');
             var telefono = $(this).data('telefono');
-            $('#modificarClienteModalCenter').modal('show');
+            var email = $(this).data('email');
+            //var credencial = $(this).data('credencial');
+            $('#modificarVendedorModalCenter').modal('show');
             $('.dui').val(dui);
+            $('.email').val(email);
             $('.nombre_completo').val(nombre_completo);
             $('.direccion').val(direccion);
             $('.telefono').val(telefono);
@@ -169,5 +189,12 @@
             $('.nombre_completo').text(nombre_completo);
             $('.vendedor2').val(vendedor);
         });
-    });
+
+
+
+        /* $('#modificarVendedorModalCenter').on('onsubmit', '.exit', function () {
+             $('#cerrarSesionModalCenter').modal('show');
+         });*/
+
+    });    
 </script>
