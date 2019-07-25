@@ -130,29 +130,35 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="submit" class="btn btn-primary" >Guardar</button>
                     </div>
                     <div class="modal-body"></div>
                 </div>
             </div>
         </div>
+    </div>
 </form>
 
-<!-- Modal Elimiar Clientes -->
-<form action="/clientes/delete" method="post">
+<!-- Modal Eliminar  Vendedor -->
+<form action="/vendedor/delete" method="post">
     <div class="modal fade" id="eliminarVendedorModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="eliminarVendedorModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eliminarVendedorModalCenterTitle">Eliminar Vendedor</h5>
+                    <h5 class="modal-title" id="eliminarVendedorModalCenterTitle">Eliminar Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <strong>Desea eliminar vendedor : </strong><strong
-                        class="nombre_completo"></strong><strong>?</strong>
+                    <strong>Desea eliminar Vendedor : </strong>
+                    <strong class="nombre_completo"></strong>
+                    <strong>?</strong>
+
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="id" class="form-control cliente_id2" required>
+                    <input type="hidden" name="id_vendedor" class="vendedor2" readonly>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                     <button type="submit" class="btn btn-success">Si</button>
                 </div>
@@ -160,8 +166,6 @@
         </div>
     </div>
 </form>
-
-
 
 
 
@@ -173,7 +177,6 @@
             var direccion = $(this).data('direccion');
             var telefono = $(this).data('telefono');
             var email = $(this).data('email');
-            //var credencial = $(this).data('credencial');
             $('#modificarVendedorModalCenter').modal('show');
             $('.dui').val(dui);
             $('.email').val(email);
@@ -191,10 +194,6 @@
         });
 
 
+    }); 
 
-        /* $('#modificarVendedorModalCenter').on('onsubmit', '.exit', function () {
-             $('#cerrarSesionModalCenter').modal('show');
-         });*/
-
-    });    
 </script>

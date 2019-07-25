@@ -6,14 +6,14 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const mysql_store = require('express-mysql-session');
 const passport = require('passport');
-
-
-
 const { database } = require('./keys');
+const notification = require('express-flash-notification');
+
 
 //inizaliaciones
 const app = express();
 require('./lib/passport');
+
 
 //Configuraciones
 app.set('port', process.env.PORT || 4000);
@@ -42,13 +42,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
+
 //Variables Globales
 app.use((req, res, next) => {
   app.locals.fallido = req.flash('fallido');
-  app.locals.realizado = req.flash('realizado');  
-  app.locals.importante = req.flash('importante');  
+  app.locals.realizado = req.flash('realizado');
+  app.locals.importante = req.flash('importante');
   app.locals.usuario = req.user;
-//  console.log(app.locals.usuario);
+  //  console.log(app.locals.usuario);
   next();
 });
 
@@ -69,3 +71,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log('servidor en puerto:', app.get('port'));
 });
+

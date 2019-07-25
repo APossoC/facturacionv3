@@ -23,7 +23,7 @@ router.post('/add', isLoggedIn, async (req, res) => {
         req.flash('importante', 'Ya existe! email suministrado');
         res.redirect('/vendedor');
 
-    } if (verificacion_vendedor[0]) {
+    } else if (verificacion_vendedor[0]) {
         req.flash('importante', 'Ya existe! identificacion sumunistrada');
         res.redirect('/vendedor');
     }
@@ -49,10 +49,6 @@ router.post('/delete', isLoggedIn, async (req, res) => {
     const filas = await poolBd.query('SELECT * FROM vendedor WHERE id_vendedor = ?', [req.body.id_vendedor]);
     const id_vendedor = req.body.id_vendedor;
     const id_acceso = filas[0].acceso_id;
-    if (filas[0].email === 'admin@admin.admin') {
-        req.flash('importante', 'Importante no se puede borrar Admin');
-        res.redirect('/vendedor');
-    }
     if (req.user.id_acceso == id_acceso) {
         req.flash('importante', 'Importante no se puede borrar Usuario en Session');
         res.redirect('/vendedor');
@@ -82,25 +78,19 @@ router.post('/edit', isLoggedIn, async (req, res) => {
         telefono,
         acceso_id
     };
-    if (email === 'admin@admin.admin') {
-        req.flash('importante', 'Importante no se puede modificar Admin');
-        res.redirect('/vendedor');
-    } else if (req.user.id_acceso == acceso_id) {
+    if (req.user.id_acceso == acceso_id) {
         await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
         await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
-        req.logOut();
+        // req.logOut();
     }
     else {
-        await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
-        await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
-        req.flash('realizado', 'Vendedor modificado satificactoriamente');
-        req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
-        res.redirect('/vendedor');
+        req.connection('GOOD', 'MESSAGE', '/');
+        //await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
+        //await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
+        //req.flash('realizado', 'Vendedor modificado satificactoriamente');
+        //req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
+        //res.redirect('/vendedor');
     }
-
-
-
-
 
 });
 

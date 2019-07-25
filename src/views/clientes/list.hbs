@@ -19,7 +19,7 @@
             <tbody>
                 <tr>
                     {{#each clientes}}
-                    <th scope="row">{{id}}</td>
+                    <th scope="row">{{id_cliente}}</td>
                     <td>{{dui}}</td>
                     <td>{{nombre_completo}}</td>
                     <td>{{direccion}}</td>
@@ -60,18 +60,18 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <input type="number" name="dui" class="form-control" placeholder="Dui" required="true">
+                        <input type="number" name="dui" class="form-control" placeholder="Dui" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="nombre_completo" class="form-control" placeholder="Nombre Completo"
-                            required="true">
+                            required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="direccion" class="form-control" placeholder="Direccion"
-                            required="true">
+                            required>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telefono" class="form-control" placeholder="Telefono" required="true">
+                        <input type="text" name="telefono" class="form-control" placeholder="Telefono" required>
                     </div>
 
                 </div>
@@ -98,17 +98,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="number" name="dui" class="form-control dui" placeholder="Dui">
+                        Dui: <input type="number" name="dui" class="form-control dui" placeholder="Dui" readonly>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="nombre_completo" class="form-control nombre_completo"
+                        Nombre Completo: <input type="text" name="nombre_completo" class="form-control nombre_completo"
                             placeholder="Nombre Completo">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="direccion" class="form-control direccion" placeholder="Direccion">
+                        Direccion: <input type="text" name="direccion" class="form-control direccion" placeholder="Direccion">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
+                        Telefono: <input type="text" name="telefono" class="form-control telefono" placeholder="Telefono">
                     </div>
                 </div>
                 <div class="modal-footer">
