@@ -60,6 +60,8 @@ app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
 app.use('/clientes', require('./routes/clientes'));
 app.use('/vendedor', require('./routes/vendedor'));
+app.use('/producto', require('./routes/producto'));
+app.use('/venta', require('./routes/venta'));
 
 
 

@@ -1,0 +1,166 @@
+<div class="container p4">
+    <div class="row">
+        <table class="table-sm table-striped table-dark" id="tablaProducto">
+            <caption>Lista de Productos</caption>
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Valor Bodega</th>
+                    <th scope="col">
+                        <a href="#" class="btn btn-success" data-toggle="modal"
+                            data-target="#agregarProductoModalCenter">Agregar</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    {{#each producto}}
+                    <th scope="row">{{id_producto}}</td>
+                    <td>{{nombre}}</td>
+                    <td>{{descripcion}}</td>
+                    <td>{{valor_bodega}}</td>
+                    <td><a href="javascript:void(0);" class="btn btn-primary edit" data-nombre="{{nombre}}"
+                            data-id_producto="{{id_producto}}" data-descripcion="{{descripcion}}"
+                            data-valor_bodega="{{valor_bodega}}">Editar</a></td>
+                    <td><a href="javascript:void(0);" class="btn btn-danger delete" data-id_producto="{{id_producto}}"
+                            data-nombre="{{nombre}}" data-descripcion="{{descripcion}}">Borrar</a></td>
+
+
+                </tr>
+                {{else }}
+                <tr>
+                    <th>No hay datos guardados.</th>
+                </tr>
+                {{/each}}
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<!-- Modal Agregar Productos -->
+<form method="post" action="/producto/add">
+    <div class="modal fade" id="agregarProductoModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="agregarProductoModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Agregar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="nombre" class="form-control" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="descripcion" class="form-control" placeholder="Descripcion" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="valor_bodega" class="form-control moneda" placeholder="Valor Bodega"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Modal Modificar Producto -->
+<form action="/producto/edit" method="post">
+    <div class="modal fade" id="modificarProductoModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="modificarProductoModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modificarProductoModalCenterTitle">Modificar Pruducto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        Nombre: <input type="text" name="id_producto" class="form-control id_producto" readonly>
+                    </div>
+                    <div class="form-group">
+                        Nombre: <input type="text" name="nombre" class="form-control nombre" required>
+                    </div>
+                    <div class="form-group">
+                        Descripcion: <input type="text" name="descripcion" class="form-control descripcion" required>
+                    </div>
+                    <div class="form-group">
+                        Valor Bodega:<input type="number" name="valor_bodega" class="form-control valor_bodega"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Modal Eliminar Producto -->
+<form action="/producto/delete" method="post">
+    <div class="modal fade" id="eliminarProductoModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="eliminarProductoModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eliminarProductoModalCenterTitle">Eliminar Producto</h5>
+                </div>
+                <div class="modal-body">
+                    <strong>Desea eliminar producto : </strong><strong class="nombre"></strong>
+                    <strong class="descripcion"></strong><strong>?</strong>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="id_producto" class="form-control producto2" required>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-success">Si</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        $('#tablaProducto').on('click', '.edit', function () {
+            var id_producto = $(this).data('id_producto');
+            var nombre = $(this).data('nombre');
+            var descripcion = $(this).data('descripcion');
+            var valor_bodega = $(this).data('valor_bodega');
+            $('#modificarProductoModalCenter').modal('show');
+            $('.id_producto').val(id_producto);
+            $('.nombre').val(nombre);
+            $('.descripcion').val(descripcion);
+            $('.valor_bodega').val(valor_bodega);
+        });
+
+        $('#tablaProducto').on('click', '.delete', function () {
+            var producto_id = $(this).data('id_producto');
+            var nombre = $(this).data('nombre');
+            var descripcion = $(this).data('descripcion')
+            $('#eliminarProductoModalCenter').modal('show');
+            $('.nombre').text(nombre);
+            $('.descripcion').text(descripcion);
+            $('.producto2').val(producto_id);
+        });
+    });
+
+
+</script>

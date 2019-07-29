@@ -84,12 +84,12 @@ router.post('/edit', isLoggedIn, async (req, res) => {
         // req.logOut();
     }
     else {
-        req.connection('GOOD', 'MESSAGE', '/');
-        //await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
-        //await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
-        //req.flash('realizado', 'Vendedor modificado satificactoriamente');
-        //req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
-        //res.redirect('/vendedor');
+        
+        await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
+        await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
+        req.flash('realizado', 'Vendedor modificado satificactoriamente');
+        req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
+        res.redirect('/vendedor');
     }
 
 });
