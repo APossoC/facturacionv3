@@ -10,98 +10,94 @@
                     <!-- <h3 class="panel-title">Cabecera</h3> -->
                     <hr>
                     <div class="row">
+
+
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">Cliente</label>
-
-                                <form action="/venta/clientes" method="POST">
-                                    <select class="custom-select col-sm-6" id="selectCliente" name="selectCliente">
-                                        <option selected disabled>Selecciona el Cliente</option>
-                                        {{#each clientes}}
-                                        <option>1</option>
-                                        {{/each}}
-                                    </select>
-                                    <button type="submit">Submit</button>
-                                </form>
-
+                                <a href="#" class="btn btn-success" data-toggle="modal"
+                                    data-target="#consultarClienteModalCenter">Seleccionar Cliente</a>
                             </div>
                         </div>
 
 
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
 
-                            <label for="fecha" class="col-sm-5 control-label">Fecha factura</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" id="fecha" placeholder="fecha factura" type="date">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+
+                                <label for="fecha" class="col-sm-5 control-label">Fecha factura</label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" id="fecha" placeholder="fecha factura" type="date">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="id" class="col-sm-3 control-label">Vendedor</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" value="{{usuario.id_acceso}} - {{usuario.email}}"
-                                    type="text" readonly>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="id" class="col-sm-3 control-label">Vendedor</label>
+                                <div class="col-sm-7">
+                                    <a href="#" class="btn btn-success" data-toggle="modal"
+                                        data-target="#consultarVendedorModalCenter">Seleccionar Vendedor</a>
+                                    <input class="form-control email_vendedor" value="{{usuario.email}}" type="text" readonly>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> <!-- row -->
-                <br>
-                <div class="row">
-                    <div class="col-md-6">
-                        <address>
-                            <strong class="">BERNARDO GINARD PRATS</strong><br class="">
-                            Carrer Ciutadella nº 26 A<br class="">
-                            07008 Palma<br class="">
-                            Illes Balears<br class="">
-                        </address>
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- panel heading -->
-            <div class="panel-body">
-                <h3 class="panel-title">Detalle</h3>
+                    </div> <!-- row -->
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <address>
+                                <h3 class="nombre_completo"></h3>
+                                <h3 class="direccion"> </h3>
+                                <h2 class="dui">
+                                    </h3>
+                                    <h3 class="telefono"> </h3>
+                            </address>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- panel heading -->
+                <div class="panel-body">
+                    <h3 class="panel-title">Detalle</h3>
 
-                <table class="table table-condensed">
-                    <thead>
-                        <tr>
-                            <th class="">Producto</th>
-                            <th class="">Descripción</th>
-                            <th class="">cantidad</th>
-                            <th class="">precio</th>
-                            <th class="">tipo impuesto</th>
-                            <th class="">importe</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="">001</td>
-                            <td class="">Doe moe</td>
-                            <td class="">12.00</td>
-                            <td class="">100.00</td>
-                            <td class="">Reducido 7%</td>
-                            <td class="">1200.00</td>
-                        </tr>
-                        <tr>
-                            <td class="">002</td>
-                            <td class="">Doe moe TURURU</td>
-                            <td class="">10.00</td>
-                            <td class="">1000.00</td>
-                            <td class="">Normal 18%</td>
-                            <td class="">10000.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> <!-- panel body -->
-            <div class="panel-footer">Piefactura
-            </div>
-        </div> <!-- panel -->
-    </div> <!-- col -->
-</div> <!-- row -->
-<div class="row text-center">
-    <p class="">peu pagina</p>
-</div>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="">Producto</th>
+                                <th class="">Descripción</th>
+                                <th class="">cantidad</th>
+                                <th class="">precio</th>
+                                <th class="">tipo impuesto</th>
+                                <th class="">importe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="">001</td>
+                                <td class="">Doe moe</td>
+                                <td class="">12.00</td>
+                                <td class="">100.00</td>
+                                <td class="">Reducido 7%</td>
+                                <td class="">1200.00</td>
+                            </tr>
+                            <tr>
+                                <td class="">002</td>
+                                <td class="">Doe moe TURURU</td>
+                                <td class="">10.00</td>
+                                <td class="">1000.00</td>
+                                <td class="">Normal 18%</td>
+                                <td class="">10000.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- panel body -->
+                <div class="panel-footer">Piefactura
+                </div>
+            </div> <!-- panel -->
+        </div> <!-- col -->
+    </div> <!-- row -->
+    <div class="row text-center">
+        <p class="">peu pagina</p>
+    </div>
 </div> <!-- container -->
 
 <!-- Modal Consulta Cliente -->
@@ -110,26 +106,80 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="consultarClienteModalCenterTitle">Cliente seleccionado </h5>
+                <h5 class="modal-title" id="consultarClienteModalCenterTitle">Selecciona el Cliente</h5>
             </div>
-
             <div class="modal-body">
-                <div class="form-group">
-                    <strong>Dui:</strong><label>{{dui}}</label>
-                </div>
-                <div class="form-group">
-                    <strong>Nombre Completo: </strong><label>{{nombre_completo}}</label>
-                </div>
-                <div class="form-group">
-                    <strong>Direccion: </strong><label>{{direccion}}</label>
-                </div>
-                <div class="form-group">
-                    <strong>Telefono: </strong><label>{{telefono}}</label>
-                </div>
-            </div>
+                <table class="table-sm table-striped table-light" id="tablaClientes">
+                    <caption>Lista de Clientes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Documento Identidad</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {{#each clientes}}
+                            <th scope="row">{{id_cliente}}</td>
+                            <td>{{dui}}</td>
+                            <td>{{nombre_completo}}</td>
+                            <td>{{direccion}}</td>
+                            <td>{{telefono}}</td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary selectCliente" data-dui="{{dui}}"
+                                    data-nombre_completo="{{nombre_completo}}" data-direccion="{{direccion}}"
+                                    data-telefono="{{telefono}}" data-dismiss="modal">Seleccionar</a></td>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                        </tr>
+                        {{/each }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Consulta Vendedor -->
+<div class="modal fade" id="consultarVendedorModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="consultarVendedorModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="consultarVendedorModalCenterTitle">Selecciona el Vendedor</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table-striped table-light rounded-top rounded-bottom" id="tablaVendedor">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Documento Identidad</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            {{#each vendedor}}
+                            <th scope="row">{{id_vendedor}}</td>
+                            <td>{{dui}}</td>
+                            <td>{{nombre_completo}}</td>
+                            <td>{{direccion}}</td>
+                            <td>{{telefono}}</td>
+                            <td>{{acceso_id}}</td>
+                            <td>{{email}}</td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary selectVendedor" data-email="{{email}}" data-dismiss="modal">Seleccionar</a></td>
+
+                        </tr>
+
+                        {{/each}}
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>
@@ -142,22 +192,35 @@
 </style>
 
 <script>
-    /* $(document).ready(function () {
-         $('#seleccion_cliente').on('select', '.seleccionado', function () {
-             $('#consultarClienteModalCenter').modal('show');
-         });
-     });*/
+    $(document).ready(function () {
+        $('#tablaClientes').on('click', '.selectCliente', function () {
+            var dui = $(this).data('dui');
+            var nombre_completo = $(this).data('nombre_completo');
+            var direccion = $(this).data('direccion');
+            var telefono = $(this).data('telefono');
+            $('.dui').text(dui);
+            $('.nombre_completo').text(nombre_completo);
+            $('.direccion').text(direccion);
+            $('.telefono').text(telefono);
+        });
+
+        $('#tablaVendedor').on('click', '.selectVendedor', function () {
+            var email = $(this).data('email');
+            $('.email_vendedor').val(email);
+
+        });
+    });
     /*  $(document).ready(function () { //Make script DOM ready
           $('#selectCliente').change(function () { //jQuery Change Function
               var opval = $(this).val(); //Get value from select element
-  
+
               $('.x').text($('#clienteSeleccionado'));
               if (opval != "Selecciona el Cliente") { //Compare it and if true
                   $('#consultarClienteModalCenter').modal("show"); //Open Modal
               }
           });
-  
-  
+
+
       });*/
 
 
