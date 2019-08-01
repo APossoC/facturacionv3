@@ -9,20 +9,21 @@
                 <div class="panel-heading">
                     <!-- <h3 class="panel-title">Cabecera</h3> -->
                     <hr>
-                    <div class="row">
+                    <div class="row" style="background-color:green;">
 
-
-                        <div class="col-md-4">
+                        <div class="col-md-5" style="background-color:white;">
                             <div class="form-group">
-                                <a href="#" class="btn btn-success" data-toggle="modal"
-                                    data-target="#consultarClienteModalCenter">Seleccionar Cliente</a>
+                                <label for="cliente" class="col-sm-2 control-label">Cliente</label>
+
+                                <div class="col-sm-10">
+                                    <a href="#" class="btn btn-success" data-toggle="modal"
+                                        data-target="#consultarClienteModalCenter">Seleccionar
+                                        Cliente</a>
+                                </div>
+
                             </div>
                         </div>
-
-
-
-
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="background-color:white;">
                             <div class="form-group">
 
                                 <label for="fecha" class="col-sm-5 control-label">Fecha factura</label>
@@ -31,14 +32,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3 target" style="background-color:white;">
                             <div class="form-group">
-                                <label for="id" class="col-sm-3 control-label">Vendedor</label>
-                                <div class="col-sm-7">
-                                    <a href="#" class="btn btn-success" data-toggle="modal"
-                                        data-target="#consultarVendedorModalCenter">Seleccionar Vendedor</a>
-                                    <input class="form-control email_vendedor" value="{{usuario.email}}" type="text" readonly>
-
+                                <label for="id" class="col-sm-3 control-label">Id</label>
+                                <div class="col-sm-9">
+                                    <input data-toggle="modal" data-target="#consultarVendedorModalCenter"
+                                        class="form-control" id="id" type="text" value="{{usuario.email}}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -46,12 +45,31 @@
                     <br>
                     <div class="row">
                         <div class="col-md-6">
+                            <input name="id_cliente" class="id_cliente" disabled></input>
                             <address>
-                                <h3 class="nombre_completo"></h3>
-                                <h3 class="direccion"> </h3>
-                                <h2 class="dui">
-                                    </h3>
-                                    <h3 class="telefono"> </h3>
+                                Nombre Completo Cliente: <strong class="nombre_completoCliente"></strong>
+                                <br class="">
+                                Direccion despacho: <strong class="direccionCliente"></strong>
+                                <br class="">
+                                Telefono contacto: <strong class="telefonoCliente"></strong>
+                                <br class="">
+                                Documento de identidad: <strong class="duiCliente"></strong>
+                                <br class="">
+                            </address>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="id_vendedor" class="id_vendedor" disabled
+                                value="{{usuario.id_vendedor}}"></input>
+                            <address>
+                                Nombre Completo Vendedor: <strong
+                                    class="nombre_completoVendedor">{{usuario.nombre_completo}}</strong>
+                                <br class="">
+                                Telefono contacto: <strong class="telefonoVendedor">{{usuario.telefono}}</strong>
+                                <br class="">
+                                Documento de identidad: <strong class="duiCVendedor">{{usuario.dui}}</strong>
+                                <br class="">
+                                Email: <strong class="emailVendedor">{{usuario.acceso_id}}</strong>
+                                <br class="">
                             </address>
                         </div>
                     </div> <!-- row -->
@@ -59,7 +77,7 @@
                 <div class="panel-body">
                     <h3 class="panel-title">Detalle</h3>
 
-                    <table class="table table-condensed">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th class="">Producto</th>
@@ -87,10 +105,18 @@
                                 <td class="">Normal 18%</td>
                                 <td class="">10000.00</td>
                             </tr>
+                            <tr>
+                                <td class=""></td>
+                                <td class=""></td>
+                                <td class=""></td>
+                                <td class=""></td>
+                                <th class="">TOTAL</th>
+                                <td class="">10000.00</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div> <!-- panel body -->
-                <div class="panel-footer">Piefactura
+                <div class="panel-footer text-center">Piefactura
                 </div>
             </div> <!-- panel -->
         </div> <!-- col -->
@@ -128,7 +154,8 @@
                             <td>{{nombre_completo}}</td>
                             <td>{{direccion}}</td>
                             <td>{{telefono}}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary selectCliente" data-dui="{{dui}}"
+                            <td><a href="javascript:void(0);" class="btn btn-primary seleccionarCliente"
+                                    data-id_cliente="{{id_cliente}}" data-dui="{{dui}}"
                                     data-nombre_completo="{{nombre_completo}}" data-direccion="{{direccion}}"
                                     data-telefono="{{telefono}}" data-dismiss="modal">Seleccionar</a></td>
 
@@ -172,7 +199,10 @@
                             <td>{{telefono}}</td>
                             <td>{{acceso_id}}</td>
                             <td>{{email}}</td>
-                            <td><a href="javascript:void(0);" class="btn btn-primary selectVendedor" data-email="{{email}}" data-dismiss="modal">Seleccionar</a></td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary seleccionarVendedor"
+                                    data-id_vendedor="{{id_vendedor}}" data-dui="{{dui}}"
+                                    data-nombre_completo="{{nombre_completo}}" data-email="{{email}}"
+                                    data-telefono="{{telefono}}" data-dismiss="modal">Seleccionar</a></td>
 
                         </tr>
 
@@ -185,43 +215,32 @@
     </div>
 </div>
 
-<style>
-    body {
-        padding-top: 50px;
-    }
-</style>
-
 <script>
     $(document).ready(function () {
-        $('#tablaClientes').on('click', '.selectCliente', function () {
-            var dui = $(this).data('dui');
-            var nombre_completo = $(this).data('nombre_completo');
-            var direccion = $(this).data('direccion');
-            var telefono = $(this).data('telefono');
-            $('.dui').text(dui);
-            $('.nombre_completo').text(nombre_completo);
-            $('.direccion').text(direccion);
-            $('.telefono').text(telefono);
+        $('#tablaClientes').on('click', '.seleccionarCliente', function () {
+            var id_cliente = $(this).data('id_cliente');
+            var duiC = $(this).data('dui');
+            var nombre_completoC = $(this).data('nombre_completo');
+            var direccionC = $(this).data('direccion');
+            var telefonoC = $(this).data('telefono');
+            $('.id_cliente').val(id_cliente);
+            $('.duiCliente').text(duiC);
+            $('.nombre_completoCliente').text(nombre_completoC);
+            $('.direccionCliente').text(direccionC);
+            $('.telefonoCliente').text(telefonoC);
         });
 
-        $('#tablaVendedor').on('click', '.selectVendedor', function () {
-            var email = $(this).data('email');
-            $('.email_vendedor').val(email);
-
+        $('#tablaVendedor').on('click', '.seleccionarVendedor', function () {
+            var id_vendedor = $(this).data('id_vendedor');
+            var duiV = $(this).data('dui');
+            var nombre_completoV = $(this).data('nombre_completo');
+            var emailV = $(this).data('email');
+            var telefonoV = $(this).data('telefono');
+            $('.id_vendedor').val(id_vendedor);
+            $('.duiVendedor').text(duiV);
+            $('.nombre_completoVendedor').text(nombre_completoV);
+            $('.emailVendedor').text(emailV);
+            $('.telefonoVendedor').text(telefonoV);
         });
     });
-    /*  $(document).ready(function () { //Make script DOM ready
-          $('#selectCliente').change(function () { //jQuery Change Function
-              var opval = $(this).val(); //Get value from select element
-
-              $('.x').text($('#clienteSeleccionado'));
-              if (opval != "Selecciona el Cliente") { //Compare it and if true
-                  $('#consultarClienteModalCenter').modal("show"); //Open Modal
-              }
-          });
-
-
-      });*/
-
-
 </script>

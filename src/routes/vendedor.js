@@ -81,10 +81,11 @@ router.post('/edit', isLoggedIn, async (req, res) => {
     if (req.user.id_acceso == acceso_id) {
         await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
         await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
-        // req.logOut();
+        req.flash('realizado', 'Vendedor modificado satificactoriamente');
+        req.flash('importante', 'Importante Acceso al sistema modificado adicionalmente');
+        res.redirect('/vendedor');
     }
     else {
-        
         await poolBd.query('UPDATE vendedor SET ? WHERE dui = ?', [editarVendedor, dui]);
         await poolBd.query('UPDATE acceso SET ? WHERE email = ?', [editarAcceso, email]);
         req.flash('realizado', 'Vendedor modificado satificactoriamente');

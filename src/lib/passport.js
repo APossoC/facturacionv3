@@ -12,8 +12,7 @@ passport.use('local.signin', new LocalStrategy({
     const filas = await poolDB.query('SELECT * FROM acceso WHERE email = ? ', [email]);
     if (filas.length > 0) {
         const acceso = filas[0];
-       const credencialValida = 123;
-       //await helpers.compararCredencial(credencial, acceso.credencial);
+       const credencialValida = await helpers.compararCredencial(credencial, acceso.credencial);
         if (credencialValida) {
             done(null, acceso, req.flash('realizado', 'Bienvenido: ' + acceso.email));
         } else {
@@ -45,7 +44,8 @@ passport.serializeUser((acceso, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    const filas = await poolDB.query('SELECT * FROM acceso WHERE id_acceso = ?', [id]);
+    const filas = await poolDB.query('SELECT * FROM vendedor LEFT JOIN acceso ON vendedor.acceso_id = acceso.id_acceso WHERE acceso_id = ?', [id]);
+    //console.log(filas[0]);
     done(null, filas[0]);
     //done(null, null);
 });

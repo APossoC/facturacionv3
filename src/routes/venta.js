@@ -9,14 +9,11 @@ router.get('/', isLoggedIn, async (req, res) => {
     const vendedor = await poolBd.query('SELECT * FROM vendedor');
     //  const dui = clientes[0].dui
     //const cliente_seleccionado = await poolBd.query('SELECT * FROM cliente WHERE dui = ?', [dui]);
-    console.log(req.body.selectCliente);
+    //console.log(req.body.selectCliente);
     res.render('venta/vender', { clientes, vendedor });
 });
 
-router.post('/clientes', isLoggedIn, async (req, res) => {
-    console.log(req.body.selectCliente);
-    res.render('venta/vender');
-});
+
 
 
 module.exports = router;

@@ -1,0 +1,152 @@
+<a href="#" class="btn btn-success" data-toggle="modal" data-target="#consultarClienteModalCenter">Seleccionar
+    Cliente</a>
+
+<a href="#" class="btn btn-success" data-toggle="modal" data-target="#consultarVendedorModalCenter">Seleccionar
+    Vendedor</a>
+
+Nombre CLiente: <h3 class="nombre_completo"></h3>
+Dui:<h3 class="dui"> </h3>
+Direccion: <h3 class="direccion"> </h3>
+Telefono: <h3 class="telefono"> </h3>
+
+Nombre CLiente: <h3 class="nombre_completo"></h3>
+Dui:<h3 class="dui"> </h3>
+Direccion: <h3 class="direccion"> </h3>
+Telefono: <h3 class="telefono"> </h3>
+
+<!-- Modal Consulta Cliente -->
+<div class="modal fade" id="consultarClienteModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="consultarClienteModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="consultarClienteModalCenterTitle">Selecciona el Cliente</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table-sm table-striped table-light" id="tablaClientes">
+                    <caption>Lista de Clientes</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Documento Identidad</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {{#each clientes}}
+                            <th scope="row">{{id_cliente}}</td>
+                            <td>{{dui}}</td>
+                            <td>{{nombre_completo}}</td>
+                            <td>{{direccion}}</td>
+                            <td>{{telefono}}</td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary selectCliente" data-dui="{{dui}}"
+                                    data-nombre_completo="{{nombre_completo}}" data-direccion="{{direccion}}"
+                                    data-telefono="{{telefono}}" data-dismiss="modal">Seleccionar</a></td>
+
+                        </tr>
+                        {{/each }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Consulta Vendedor -->
+<div class="modal fade" id="consultarVendedorModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="consultarVendedorModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="consultarVendedorModalCenterTitle">Selecciona el Vendedor</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table-striped table-light rounded-top rounded-bottom" id="tablaVendedor">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Documento Identidad</th>
+                            <th scope="col">Nombre Completo</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            {{#each vendedor}}
+                            <th scope="row">{{id_vendedor}}</td>
+                            <td>{{dui}}</td>
+                            <td>{{nombre_completo}}</td>
+                            <td>{{direccion}}</td>
+                            <td>{{telefono}}</td>
+                            <td>{{acceso_id}}</td>
+                            <td>{{email}}</td>
+                            <td><a href="javascript:void(0);" class="btn btn-primary selectVendedor"
+                                    data-email="{{email}}" data-dismiss="modal">Seleccionar</a></td>
+
+                        </tr>
+
+                        {{/each}}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "/hero/add-fact",
+            data: JSON.stringify({ name: name, fact: fact }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $('<li>').appendTo('#facts').text(fact);
+                $('#new-fact').val('');
+            },
+            error: function (err) {
+                var msg = 'Status: ' + err.status + ': ' + err.responseText;
+                alert(msg);
+            }
+        });
+
+        $('#tablaClientes').on('click', '.selectCliente', function () {
+            var dui = $(this).data('dui');
+            var nombre_completo = $(this).data('nombre_completo');
+            var direccion = $(this).data('direccion');
+            var telefono = $(this).data('telefono');
+            $('.dui').text(dui);
+            $('.nombre_completo').text(nombre_completo);
+            $('.direccion').text(direccion);
+            $('.telefono').text(telefono);
+        });
+
+        $('#tablaVendedor').on('click', '.selectVendedor', function () {
+            var email = $(this).data('email');
+            $('.email_vendedor').val(email);
+        });
+    });
+    /*  $(document).ready(function () { //Make script DOM ready
+          $('#selectCliente').change(function () { //jQuery Change Function
+              var opval = $(this).val(); //Get value from select element
+
+              $('.x').text($('#clienteSeleccionado'));
+              if (opval != "Selecciona el Cliente") { //Compare it and if true
+                  $('#consultarClienteModalCenter').modal("show"); //Open Modal
+              }
+          });
+
+
+      });*/
+
+
+</script>
